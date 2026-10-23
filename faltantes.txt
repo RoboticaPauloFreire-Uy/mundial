@@ -1,0 +1,16 @@
+Alumnos sin tarjeta de ADELANTE encontrada (Faltantes):
+
+5A-03 - Bautista Viera (5 años A) -> Falta la tarjeta de ADELANTE
+5A-05 - Emiliano Turchich (5 años A) -> Falta la tarjeta de ADELANTE
+5B-01 - Agustín Suárez (5 años B) -> Falta la tarjeta de ADELANTE
+5B-05 - Isabella Romano (5 años B) -> Falta la tarjeta de ADELANTE
+5B-08 - Maite Garcilazo (5 años B) -> Falta la tarjeta de ADELANTE
+5B-11 - Tomás Nogués (5 años B) -> Falta la tarjeta de ADELANTE
+1B-11 - Nahuel Devicenzi (1ero B) -> Falta la tarjeta de ADELANTE
+4A-17 - Manuel Gigirey (4to A) -> Falta la tarjeta de ADELANTE
+5PA-01 - Bautista Olid (5to A) -> Falta la tarjeta de ADELANTE
+5PA-04 - Emilia González (5to A) -> Falta la tarjeta de ADELANTE
+5PA-05 - Emiliano Gil (5to A) -> Falta la tarjeta de ADELANTE
+5PA-12 - Lara Da Silva (5to A) -> Falta la tarjeta de ADELANTE
+5PA-16 - Pía Sáenz (5to A) -> Falta la tarjeta de ADELANTE
+5PA-20 - Valentina Vilizio (5to A) -> Falta la tarjeta de ADELANTE

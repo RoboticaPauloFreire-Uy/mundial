@@ -1,0 +1,2037 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;700&display=swap');
+
+:root {
+    --bg-dark: #0a1930;
+    --card-bg: #1e293b;
+    --gold: #f9c52d;
+    --blue-accent: #3b82f6;
+    --azul-institucional: #0d2b52;
+    --azul-suave: #F4F8FF;
+    --azul-casillero: #EAF2FF;
+    --azul-borde: #8AA4C8;
+    --azul-boton: #2563EB;
+    --azul-boton-hover: #1D4ED8;
+    --amarillo-cpf: #FFCC00;
+    --rojo-acento: #d42b20;
+    --texto-principal: #1E293B;
+    --cyan-neon: #00f0ff;
+}
+
+body {
+    background: 
+        radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% -20%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
+        var(--bg-dark); /* Fondo oscuro de estadio */
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Inter', sans-serif;
+    color: #f1f5f9;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Focos de Estadio Moviéndose en el fondo */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    top: -50%;
+    width: 200vw;
+    height: 200vh;
+    background: conic-gradient(from 180deg at 50% 0%, transparent 40deg, rgba(0, 240, 255, 0.03) 45deg, rgba(0, 240, 255, 0.08) 50deg, rgba(0, 240, 255, 0.03) 55deg, transparent 60deg);
+    z-index: -1;
+    pointer-events: none;
+    transform-origin: 50% 0%;
+}
+
+body::before {
+    left: -50%;
+    animation: spotlightSweep 12s ease-in-out infinite alternate;
+}
+
+body::after {
+    left: 0%;
+    animation: spotlightSweep2 16s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes spotlightSweep {
+    0% { transform: rotate(-25deg); }
+    100% { transform: rotate(35deg); }
+}
+
+@keyframes spotlightSweep2 {
+    0% { transform: rotate(15deg); }
+    100% { transform: rotate(-45deg); }
+}
+
+.titulo-mundial {
+    font-family: 'Bungee', cursive;
+    color: var(--gold);
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto Shine para cromos obtenidos */
+.figu-card.obtenida {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+}
+
+.figu-card.obtenida::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(25deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.bloqueada {
+    filter: grayscale(1) brightness(0.4);
+    border: 3px solid #334155;
+}
+
+/* =========================================
+   EFECTO ANTIGRAVEDAD (FLOTACIÓN)
+   ========================================= */
+
+.figu-card {
+    /* Mantenemos la transición suave que ya tenías */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Aplicamos la animación de antigravedad a todas las cartas */
+    animation: flotarAntigravedad 6s ease-in-out infinite;
+}
+
+/* Hacemos que cada carta flote a un ritmo ligeramente distinto 
+   para que no se vea robótico y parezca que flotan de verdad */
+.figu-card:nth-child(odd) {
+    animation-duration: 7s;
+}
+
+.figu-card:nth-child(even) {
+    animation-duration: 5.5s;
+}
+
+/* La llave mágica: el movimiento de arriba hacia abajo */
+@keyframes flotarAntigravedad {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    /* Sube 12 pixeles */
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Cuando pasas el mouse por encima, la carta se acerca hacia ti */
+.figu-card:hover {
+    transform: translateY(-15px) scale(1.05) !important;
+    z-index: 50;
+    animation-play-state: paused;
+    /* Pausa la flotación al leerla */
+}
+
+/* =========================================
+   DISEÑO DE ÁLBUM FÍSICO (PAPEL)
+   ========================================= */
+
+/* Fondo general (simulando una mesa oscura) */
+body {
+    background: #0f172a;
+}
+
+/* La Hoja del Álbum */
+.album-page {
+    /* Color crema/hueso tipo papel antiguo */
+    background-color: #f4f1ea;
+
+    /* Textura de papel generada 100% con CSS (SVG embebido) */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+
+    /* Sombras 3D: Sombra sobre la mesa y sombra del doblez de la página */
+    box-shadow:
+        25px 25px 50px rgba(0, 0, 0, 0.5),
+        inset 40px 0 50px rgba(0, 0, 0, 0.05);
+
+    border-radius: 3px 20px 20px 3px;
+    position: relative;
+    color: #1e293b;
+    /* Texto oscuro para que se lea en papel claro */
+}
+
+/* El lomo / pliegue del libro a la izquierda */
+.album-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Ajuste de Figurita Bloqueada (simulando la silueta impresa en el papel vacío) */
+.bloqueada {
+    background: transparent !important;
+    border: 2px dashed #94a3b8 !important;
+    box-shadow: none !important;
+    filter: grayscale(1) opacity(0.6);
+}
+
+
+.titulo-mundial {
+    font-family: 'Bungee', cursive;
+    color: var(--gold);
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto Shine para cromos obtenidos */
+.figu-card.obtenida {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+}
+
+.figu-card.obtenida::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(25deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.bloqueada {
+    filter: grayscale(1) brightness(0.4);
+    border: 3px solid #334155;
+}
+
+/* =========================================
+   EFECTO ANTIGRAVEDAD (FLOTACIÓN)
+   ========================================= */
+
+.figu-card {
+    /* Mantenemos la transición suave que ya tenías */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Aplicamos la animación de antigravedad a todas las cartas */
+    animation: flotarAntigravedad 6s ease-in-out infinite;
+}
+
+/* Hacemos que cada carta flote a un ritmo ligeramente distinto 
+   para que no se vea robótico y parezca que flotan de verdad */
+.figu-card:nth-child(odd) {
+    animation-duration: 7s;
+}
+
+.figu-card:nth-child(even) {
+    animation-duration: 5.5s;
+}
+
+/* La llave mágica: el movimiento de arriba hacia abajo */
+@keyframes flotarAntigravedad {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    /* Sube 12 pixeles */
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Cuando pasas el mouse por encima, la carta se acerca hacia ti */
+.figu-card:hover {
+    transform: translateY(-15px) scale(1.05) !important;
+    z-index: 50;
+    animation-play-state: paused;
+    /* Pausa la flotación al leerla */
+}
+
+/* =========================================
+   DISEÑO DE ÁLBUM FÍSICO (PAPEL)
+   ========================================= */
+
+/* Fondo general (simulando una mesa oscura) */
+body {
+    background: #0f172a;
+}
+
+/* La Hoja del Álbum */
+.album-page {
+    /* Color crema/hueso tipo papel antiguo */
+    background-color: #f4f1ea;
+
+    /* Textura de papel generada 100% con CSS (SVG embebido) */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+
+    /* Sombras 3D: Sombra sobre la mesa y sombra del doblez de la página */
+    box-shadow:
+        25px 25px 50px rgba(0, 0, 0, 0.5),
+        inset 40px 0 50px rgba(0, 0, 0, 0.05);
+
+    border-radius: 3px 20px 20px 3px;
+    position: relative;
+    color: #1e293b;
+    /* Texto oscuro para que se lea en papel claro */
+}
+
+/* El lomo / pliegue del libro a la izquierda */
+.album-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Ajuste de Figurita Bloqueada (simulando la silueta impresa en el papel vacío) */
+.bloqueada {
+    background: transparent !important;
+    border: 2px dashed #94a3b8 !important;
+    box-shadow: none !important;
+    filter: grayscale(1) opacity(0.6);
+}
+
+/* Ajuste de Figurita Obtenida (sombra de que está pegada encima del papel) */
+.obtenida {
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(234, 179, 8, 0.4) !important;
+}
+
+/* =========================================
+   TITULOS Y EFECTOS
+   ========================================= */
+
+.titulo-mundial {
+    font-family: 'Bungee', cursive;
+    color: var(--gold);
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto Shine para cromos obtenidos */
+.figu-card.obtenida {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+}
+
+.figu-card.obtenida::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(25deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.bloqueada {
+    filter: grayscale(1) brightness(0.4);
+    border: 3px solid #334155;
+}
+
+/* =========================================
+   EFECTO ANTIGRAVEDAD (FLOTACIÓN)
+   ========================================= */
+
+.figu-card {
+    /* Mantenemos la transición suave que ya tenías */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Aplicamos la animación de antigravedad a todas las cartas */
+    animation: flotarAntigravedad 6s ease-in-out infinite;
+}
+
+/* Hacemos que cada carta flote a un ritmo ligeramente distinto 
+   para que no se vea robótico y parezca que flotan de verdad */
+.figu-card:nth-child(odd) {
+    animation-duration: 7s;
+}
+
+.figu-card:nth-child(even) {
+    animation-duration: 5.5s;
+}
+
+/* La llave mágica: el movimiento de arriba hacia abajo */
+@keyframes flotarAntigravedad {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    /* Sube 12 pixeles */
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Cuando pasas el mouse por encima, la carta se acerca hacia ti */
+.figu-card:hover {
+    transform: translateY(-15px) scale(1.05) !important;
+    z-index: 50;
+    animation-play-state: paused;
+    /* Pausa la flotación al leerla */
+}
+
+/* =========================================
+   DISEÑO DE ÁLBUM FÍSICO (PAPEL)
+   ========================================= */
+
+/* Fondo general (simulando una mesa oscura) */
+body {
+    background: #0f172a;
+}
+
+/* La Hoja del Álbum */
+.album-page {
+    /* Color crema/hueso tipo papel antiguo */
+    background-color: #f4f1ea;
+
+    /* Textura de papel generada 100% con CSS (SVG embebido) */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+
+    /* Sombras 3D: Sombra sobre la mesa y sombra del doblez de la página */
+    box-shadow:
+        25px 25px 50px rgba(0, 0, 0, 0.5),
+        inset 40px 0 50px rgba(0, 0, 0, 0.05);
+
+    border-radius: 3px 20px 20px 3px;
+    position: relative;
+    color: #1e293b;
+    /* Texto oscuro para que se lea en papel claro */
+}
+
+/* El lomo / pliegue del libro a la izquierda */
+.album-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Ajuste de Figurita Bloqueada (simulando la silueta impresa en el papel vacío) */
+.bloqueada {
+    background: transparent !important;
+    border: 2px dashed #94a3b8 !important;
+    box-shadow: none !important;
+    filter: grayscale(1) opacity(0.6);
+}
+
+/* Ajuste de Figurita Obtenida (sombra de que está pegada encima del papel) */
+.obtenida {
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(234, 179, 8, 0.4) !important;
+}
+
+/* =========================================
+   DISEÑO REALISTA DE HOJA DE ÁLBUM
+   ========================================= */
+
+/* 1. El entorno (La mesa oscura donde apoya el álbum) */
+
+.titulo-mundial {
+    font-family: 'Bungee', cursive;
+    color: var(--gold);
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto Shine para cromos obtenidos */
+.figu-card.obtenida {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+}
+
+.figu-card.obtenida::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(25deg);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.bloqueada {
+    filter: grayscale(1) brightness(0.4);
+    border: 3px solid #334155;
+}
+
+/* =========================================
+   EFECTO ANTIGRAVEDAD (FLOTACIÓN)
+   ========================================= */
+
+.figu-card {
+    /* Mantenemos la transición suave que ya tenías */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Aplicamos la animación de antigravedad a todas las cartas */
+    animation: flotarAntigravedad 6s ease-in-out infinite;
+}
+
+/* Hacemos que cada carta flote a un ritmo ligeramente distinto 
+   para que no se vea robótico y parezca que flotan de verdad */
+.figu-card:nth-child(odd) {
+    animation-duration: 7s;
+}
+
+.figu-card:nth-child(even) {
+    animation-duration: 5.5s;
+}
+
+/* La llave mágica: el movimiento de arriba hacia abajo */
+@keyframes flotarAntigravedad {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    /* Sube 12 pixeles */
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Cuando pasas el mouse por encima, la carta se acerca hacia ti */
+.figu-card:hover {
+    transform: translateY(-15px) scale(1.05) !important;
+    z-index: 50;
+    animation-play-state: paused;
+    /* Pausa la flotación al leerla */
+}
+
+/* =========================================
+   DISEÑO DE ÁLBUM FÍSICO (PAPEL)
+   ========================================= */
+
+/* Fondo general (simulando una mesa oscura) */
+body {
+    background: #0f172a;
+}
+
+/* La Hoja del Álbum */
+.album-page {
+    /* Color crema/hueso tipo papel antiguo */
+    background-color: #f4f1ea;
+
+    /* Textura de papel generada 100% con CSS (SVG embebido) */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+
+    /* Sombras 3D: Sombra sobre la mesa y sombra del doblez de la página */
+    box-shadow:
+        25px 25px 50px rgba(0, 0, 0, 0.5),
+        inset 40px 0 50px rgba(0, 0, 0, 0.05);
+
+    border-radius: 3px 20px 20px 3px;
+    position: relative;
+    color: #1e293b;
+    /* Texto oscuro para que se lea en papel claro */
+}
+
+/* El lomo / pliegue del libro a la izquierda */
+.album-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Ajuste de Figurita Bloqueada (simulando la silueta impresa en el papel vacío) */
+.bloqueada {
+    background: transparent !important;
+    border: 2px dashed #94a3b8 !important;
+    box-shadow: none !important;
+    filter: grayscale(1) opacity(0.6);
+}
+
+/* Ajuste de Figurita Obtenida (sombra de que está pegada encima del papel) */
+.obtenida {
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(234, 179, 8, 0.4) !important;
+}
+
+/* =========================================
+   DISEÑO REALISTA DE HOJA DE ÁLBUM
+   ========================================= */
+
+/* 1. El entorno (La mesa oscura donde apoya el álbum) */
+body {
+    background:
+        radial-gradient(circle at top, rgba(37, 99, 235, 0.08), transparent 35%),
+        var(--azul-suave);
+}
+
+/* 2. La Hoja de Papel Principal */
+.album-page {
+    background-color: var(--azul-suave) !important;
+
+    background-image: 
+        radial-gradient(circle at top, rgba(37, 99, 235, 0.1), transparent 45%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E") !important;
+
+    /* Bordes redondeados típicos de hoja (menos curvo del lado del lomo) */
+    border-radius: 3px 20px 20px 3px;
+
+    /* Sombras 3D: Sombra oscura sobre la mesa + curvatura de la hoja */
+    box-shadow:
+        -15px 0 24px rgba(0, 51, 102, 0.06) inset,
+        0 18px 45px rgba(15, 23, 42, 0.18);
+
+    position: relative;
+    overflow: hidden;
+    min-height: auto !important;
+}
+
+/* 3. El Lomo del Libro (Encuadernación izquierda) */
+.album-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 45px;
+    /* Degradado que simula la sombra donde se pliega la hoja */
+    background: linear-gradient(to right, rgba(0, 51, 102, 0.14) 0%, rgba(255, 255, 255, 0.45) 34%, rgba(0, 51, 102, 0) 100%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.album-nav-btn {
+    position: relative;
+    z-index: 30;
+    background-color: var(--azul-boton) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+    transform: translateZ(0);
+}
+
+.album-nav-btn:hover {
+    background-color: var(--azul-boton-hover) !important;
+}
+
+.album-controls {
+    position: relative;
+    z-index: 25;
+    isolation: isolate;
+    transform: translateZ(0);
+}
+
+.country-title {
+    display: block;
+    margin-top: 2px;
+    color: var(--azul-institucional);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+}
+
+/* 4. Casillero Vacío (Figurita Bloqueada) */
+.bloqueada {
+    background-color: transparent !important;
+    border: 2px dashed #cbd5e1 !important;
+    /* Línea punteada impresa en el papel */
+    box-shadow: none !important;
+    filter: grayscale(100%) opacity(0.35);
+    /* Casi transparente para que se lea como "guía" */
+    transition: all 0.3s ease;
+}
+
+/* 5. Figurita Pegada (Figurita Obtenida) */
+.obtenida {
+    background-color: white !important;
+    padding: 4px !important;
+    /* Simula el margen blanco clásico de las figuritas */
+    /* Sombra profunda para que resalte sobre el papel */
+    box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.35), -1px -1px 0 rgba(255, 255, 255, 0.8) inset !important;
+    border: none !important;
+    z-index: 5;
+}
+
+/* 6. Truco de diseño: Pegadas a mano (Imperfección) */
+/* Rota ligerísimamente algunas cartas para que no se vean digitalmente perfectas */
+.obtenida:nth-child(even) {
+    transform: rotate(1.5deg);
+}
+
+.obtenida:nth-child(odd) {
+    transform: rotate(-1deg);
+}
+
+.obtenida:nth-child(3n) {
+    transform: rotate(0.5deg);
+}
+
+/* Arreglo para los textos oscuros sobre papel claro */
+.album-page h1,
+.album-page h2,
+.album-page p {
+    text-shadow: none;
+    /* Quitamos sombras brillantes para que parezca tinta impresa */
+}
+
+.titulo-mundial {
+    color: #b45309 !important;
+    /* Rojo oscuro/dorado estilo tinta */
+}
+
+/* =========================================
+   ANIMACIÓN 3D: PASAR LA HOJA
+   ========================================= */
+
+/* Le damos perspectiva 3D al contenedor de la página */
+.album-page {
+    transform-origin: left center !important;
+    /* La bisagra (el lomo) está a la izquierda */
+    transform-style: preserve-3d;
+    perspective: 2000px;
+    /* Profundidad del 3D */
+}
+
+/* Animación: La hoja vieja se levanta y se va hacia la izquierda */
+@keyframes darVueltaSalida {
+    0% {
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateY(-90deg) scale(0.95);
+        opacity: 0;
+    }
+}
+
+/* Animación: La hoja nueva viene desde la derecha y se apoya */
+@keyframes darVueltaEntrada {
+    0% {
+        transform: rotateY(90deg) scale(0.95);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Clases que usaremos en JavaScript para activar las animaciones */
+.hoja-saliendo {
+    animation: darVueltaSalida 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+.hoja-entrando {
+    animation: darVueltaEntrada 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+/* =========================================
+   ANIMACIÓN 3D: PASAR LA HOJA
+   ========================================= */
+
+/* Le damos perspectiva 3D al contenedor de la página */
+.album-page {
+    transform-origin: left center !important;
+    /* La bisagra (el lomo) está a la izquierda */
+    transform-style: preserve-3d;
+    perspective: 2000px;
+    /* Profundidad del 3D */
+}
+
+/* Animación: La hoja vieja se levanta y se va hacia la izquierda */
+@keyframes darVueltaSalida {
+    0% {
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateY(-90deg) scale(0.95);
+        opacity: 0;
+    }
+}
+
+/* Animación: La hoja nueva viene desde la derecha y se apoya */
+@keyframes darVueltaEntrada {
+    0% {
+        transform: rotateY(90deg) scale(0.95);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Clases que usaremos en JavaScript para activar las animaciones */
+.hoja-saliendo {
+    animation: darVueltaSalida 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+.hoja-entrando {
+    animation: darVueltaEntrada 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+#cover-view {
+    perspective: 2000px;
+    /* Importante para el efecto 3D al abrir */
+}
+
+#cover-view>div {
+    /* Efecto de textura de cuero o plástico de tapa */
+    background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 4px 4px;
+}
+
+/* =========================================
+   ESTILOS DE LAS FIGURITAS (PANINI STYLE)
+   ========================================= */
+
+/* 1. EL CUADRO VACÍO (Placeholder) */
+.figurita-vacia {
+    background-color: var(--azul-casillero);
+    border: 2px dashed var(--azul-borde);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: inset 0 2px 10px rgba(0, 51, 102, 0.06);
+}
+
+/* Silueta genérica para el centro */
+.figurita-vacia::before {
+    content: "";
+    width: 74px;
+    height: 74px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    opacity: 0.42;
+    background:
+        radial-gradient(circle at 50% 24%, var(--azul-borde) 0 13px, transparent 14px),
+        linear-gradient(var(--azul-borde), var(--azul-borde)) center 52px / 54px 22px no-repeat;
+    border-radius: 999px;
+}
+
+/* ID en la esquina (Gris) */
+.id-vacio {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #6B86A8;
+    font-family: monospace;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 4px;
+    padding: 10px 5px;
+}
+
+/* === 3D PAGE FLIP === */
+@keyframes flipNextOut {
+    0% { transform: rotateY(0deg) scale(1); filter: brightness(1); }
+    100% { transform: rotateY(-90deg) scale(0.98); filter: brightness(0.6); }
+}
+@keyframes flipNextIn {
+    0% { transform: rotateY(90deg) scale(0.98); filter: brightness(0.6); }
+    100% { transform: rotateY(0deg) scale(1); filter: brightness(1); }
+}
+@keyframes flipPrevOut {
+    0% { transform: rotateY(0deg) scale(1); filter: brightness(1); }
+    100% { transform: rotateY(90deg) scale(0.98); filter: brightness(0.6); }
+}
+@keyframes flipPrevIn {
+    0% { transform: rotateY(-90deg) scale(0.98); filter: brightness(0.6); }
+    100% { transform: rotateY(0deg) scale(1); filter: brightness(1); }
+}
+.flip-next-out { transform-origin: left center !important; animation: flipNextOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important; }
+.flip-next-in { transform-origin: left center !important; animation: flipNextIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important; }
+.flip-prev-out { transform-origin: left center !important; animation: flipPrevOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important; }
+.flip-prev-in { transform-origin: left center !important; animation: flipPrevIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important; }
+/* ========================================= */
+/* 3. PREMIUM MODAL CARD EFFECTS */
+/* ========================================= */
+.premium-modal-card {
+    position: relative;
+    border-radius: 12px;
+    border: 4px solid #D4AF37; /* Gold foil border */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.4);
+    animation: floatCard 4s ease-in-out infinite;
+    overflow: hidden;
+}
+
+.premium-modal-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -150%; width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    animation: cardGlare 3s infinite;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.holo-bg {
+    background: linear-gradient(125deg, #001a33 0%, #004080 30%, #4da6ff 50%, #004080 70%, #001a33 100%);
+    background-size: 300% 300%;
+    animation: holoGradient 6s ease infinite;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+}
+
+.gold-seal {
+    background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+    border: 2px solid #FFF;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.6);
+}
+
+.seal-text {
+    background: rgba(0,0,0,0.75);
+    border: 1px solid #D4AF37;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    color: #FFD700;
+}
+
+@keyframes floatCard {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes cardGlare {
+    0% { left: -150%; }
+    50% { left: 200%; }
+    100% { left: 200%; }
+}
+
+@keyframes holoGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.figurita-vacia h3 {
+    color: #6B86A8 !important;
+    border-color: rgba(138, 164, 200, 0.65) !important;
+}
+
+.country-card {
+    min-height: 122px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    align-items: center;
+    gap: 18px;
+    overflow: hidden;
+    padding: 16px 18px;
+    color: var(--texto-principal);
+    background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(234,242,255,0.9));
+    border: 1px solid rgba(138, 164, 200, 0.55);
+    border-left: 8px solid var(--azul-institucional);
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.12);
+}
+
+.country-card__flag-bg {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 42%;
+    opacity: 0.18;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2));
+    mask-image: linear-gradient(90deg, transparent 0%, black 40%);
+}
+
+.country-card__confed {
+    width: 96px;
+    height: 86px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background:
+        linear-gradient(145deg, #0B3A68, var(--azul-institucional));
+    border: 3px solid var(--amarillo-cpf);
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(0, 51, 102, 0.22);
+}
+
+.country-card__ball {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.country-card__confed strong {
+    font-family: 'Arial Black', Impact, sans-serif;
+    max-width: 86px;
+    font-size: clamp(0.78rem, 1.4vw, 1.2rem);
+    line-height: 1;
+    overflow-wrap: anywhere;
+}
+
+.country-card__confed small {
+    margin-top: 3px;
+    font-size: 0.48rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.country-card__confed--conmebol strong,
+.country-card__confed--concacaf strong {
+    font-size: 0.82rem;
+    letter-spacing: 0;
+}
+
+.country-card__confed--conmebol small,
+.country-card__confed--concacaf small {
+    font-size: 0.44rem;
+}
+
+.country-card__content {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+}
+
+.country-card__eyebrow {
+    margin: 0 0 2px;
+    color: #64748b;
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.country-card h3 {
+    margin: 0;
+    color: var(--azul-institucional);
+    font-family: 'Arial Black', Impact, sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.country-card__flag-main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 36px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 2px solid rgba(138, 164, 200, 0.65);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 51, 102, 0.14);
+}
+
+.country-card__flag-main,
+.country-card__flag-bg {
+    background: var(--flag);
+}
+
+.country-card--5A { --flag: linear-gradient(#FCD116 0 50%, #003893 50% 75%, #CE1126 75%); }
+.country-card--5B { --flag: radial-gradient(ellipse at center, #7C6949 0 10%, transparent 12%), linear-gradient(#FFDD00 0 50%, #034EA2 50% 75%, #ED1C24 75%); }
+.country-card--1A { --flag: radial-gradient(circle at 50% 50%, #8B4513 0 12%, transparent 13%), linear-gradient(90deg, #009E60 0 33%, #FFFFFF 33% 67%, #CE1126 67%); }
+.country-card--1B { --flag: linear-gradient(#3C3B6E, #3C3B6E) 0 0 / 40% 54% no-repeat, repeating-linear-gradient(to bottom, #B22234 0 10%, #FFFFFF 10% 20%); }
+.country-card--2A { --flag: linear-gradient(90deg, #006600 0 40%, #FF0000 40%); }
+.country-card--2B { --flag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 70'%3E%3Crect width='100' height='70' fill='%23009B3A'/%3E%3Cpolygon points='50,6 94,35 50,64 6,35' fill='%23FFDF00'/%3E%3Ccircle cx='50' cy='35' r='14' fill='%23002776'/%3E%3C/svg%3E") center / cover no-repeat; }
+.country-card--3A { --flag: radial-gradient(circle at 50% 50%, #F6B40E 0 10%, transparent 11%), linear-gradient(#74ACDF 0 33%, #FFFFFF 33% 67%, #74ACDF 67%); }
+.country-card--3B { --flag: radial-gradient(circle at 50% 50%, #8B4513 0 6%, #F6B40E 7% 10%, transparent 11%), linear-gradient(#D52B1E 0 33%, #FFFFFF 33% 67%, #0038A8 67%); }
+.country-card--4A { --flag: radial-gradient(circle at 30% 50%, #682229 0 10%, transparent 11%), linear-gradient(#AA151B 0 25%, #F1BF00 25% 75%, #AA151B 75%); }
+.country-card--4B { --flag: radial-gradient(circle at 25% 25%, #00225D 0 12%, transparent 13%), radial-gradient(circle at 75% 75%, #DA121A 0 12%, transparent 13%), linear-gradient(90deg, #FFFFFF 50%, #DA121A 50%) top / 100% 50% no-repeat, linear-gradient(90deg, #00225D 50%, #FFFFFF 50%) bottom / 100% 50% no-repeat; }
+.country-card--5PA { --flag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Crect width='100' height='60' fill='%23FF0000'/%3E%3Crect x='25' width='50' height='60' fill='%23FFFFFF'/%3E%3Cpath d='M50,12 L55,23 L65,19 L62,31 L68,36 L59,39 L60,49 L52,47 L50,55 L48,47 L40,49 L41,39 L32,36 L38,31 L35,19 L45,23 Z' fill='%23FF0000'/%3E%3C/svg%3E") center / cover no-repeat; }
+.country-card--5PB { --flag: linear-gradient(#FFFFFF, #FFFFFF) center / 30% 30% no-repeat, linear-gradient(to bottom, #00205B 0 50%, #D21034 50%); }
+.country-card--6A { --flag: linear-gradient(90deg, #0055A4 0 33%, #FFFFFF 33% 67%, #EF4135 67%); }
+.country-card--6B { --flag: linear-gradient(90deg, transparent 42%, #CE1124 42% 58%, transparent 58%), linear-gradient(transparent 42%, #CE1124 42% 58%, transparent 58%), #FFFFFF; }
+
+.country-card__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.country-card__facts span {
+    padding: 5px 8px;
+    color: var(--azul-institucional);
+    background: white;
+    border: 1px solid rgba(138, 164, 200, 0.52);
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.country-card__culture {
+    max-width: 760px;
+    margin: 8px 0 0;
+    color: #475569;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* 2. LA FIGURITA PEGADA (A Color) */
+.figurita-pegada {
+    background: linear-gradient(135deg, var(--azul-institucional) 0%, #00509E 100%);
+    /* Azul Marino / Neón */
+    border: 5px solid white;
+    /* Marco clásico Panini */
+    box-shadow: 0 8px 18px rgba(0, 51, 102, 0.22);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.figurita-pegada:hover {
+    transform: scale(1.05) rotate(1deg);
+    /* Efecto al pasar el mouse */
+    box-shadow: 0 12px 28px rgba(0, 51, 102, 0.32), 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+.figurita-pegada:hover::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transform: rotate(25deg);
+    animation: holografico 1.2s ease-out forwards;
+    pointer-events: none;
+    z-index: 20;
+}
+
+@keyframes holografico {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+.internal-cover {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 26px 20px;
+    color: var(--texto-principal);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 51, 102, 0.1), inset 0 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+.internal-cover__badge {
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    margin-bottom: 14px;
+    background: white;
+    border: 4px solid var(--azul-institucional);
+    border-radius: 999px;
+    box-shadow: 0 10px 22px rgba(0, 51, 102, 0.18);
+}
+
+.internal-cover__badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 999px;
+}
+
+.internal-cover__eyebrow {
+    margin: 0 0 6px;
+    color: var(--azul-institucional);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.internal-cover h2 {
+    margin: 0;
+    color: transparent;
+    background-image: linear-gradient(135deg, var(--azul-institucional), #2563EB);
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5.4vw, 4rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.internal-cover__year {
+    margin: 4px 0 0;
+    color: var(--amarillo-cpf);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.35rem, 3.8vw, 2.8rem);
+    font-style: italic;
+    text-shadow: 2px 2px 0 var(--azul-institucional);
+}
+
+.internal-cover__message {
+    max-width: 620px;
+    margin: 14px auto 0;
+    color: #334155;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.internal-cover__stats {
+    width: min(760px, 100%);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.internal-cover__stats div {
+    padding: 9px 8px;
+    background: white;
+    border: 1px solid rgba(138, 164, 200, 0.55);
+    border-bottom: 4px solid var(--azul-institucional);
+    border-radius: 6px;
+}
+
+.internal-cover__stats strong,
+.internal-cover__stats span {
+    display: block;
+}
+
+.internal-cover__stats strong {
+    color: var(--rojo-acento);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.internal-cover__stats span {
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.internal-cover__progress {
+    width: min(760px, 100%);
+    height: 10px;
+    margin-top: 12px;
+    overflow: hidden;
+    background: #DCEBFF;
+    border: 1px solid rgba(138, 164, 200, 0.65);
+    border-radius: 999px;
+}
+
+.internal-cover__progress span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--azul-boton), var(--amarillo-cpf));
+    border-radius: inherit;
+}
+
+.end-page {
+    min-height: 390px;
+    padding: 28px 20px;
+    color: var(--texto-principal);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(234, 242, 255, 0.5));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 51, 102, 0.1), inset 0 0 0 6px rgba(255, 255, 255, 0.45);
+}
+
+.end-page__eyebrow {
+    margin: 0 0 6px;
+    color: var(--azul-institucional);
+    font-size: 0.66rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.end-page h2 {
+    margin: 0 0 18px;
+    color: transparent;
+    background-image: linear-gradient(135deg, var(--azul-institucional), #2563EB);
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.9rem, 4vw, 3.2rem);
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.achievement-card {
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 10px;
+    text-align: center;
+    background: linear-gradient(145deg, #e2e8f0, #cbd5e1);
+    border: 2px solid #94a3b8;
+    border-radius: 12px;
+    opacity: 0.7;
+    filter: grayscale(100%);
+    transition: all 0.4s ease;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.5), 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.achievement-card--active {
+    opacity: 1;
+    filter: grayscale(0%);
+    background: linear-gradient(145deg, #fffbec, #fef08a);
+    border: 2px solid var(--gold);
+    box-shadow: 
+        inset 0 2px 4px rgba(255,255,255,0.8),
+        0 8px 16px rgba(234, 179, 8, 0.25),
+        0 0 15px rgba(234, 179, 8, 0.4);
+    transform: translateY(-4px);
+}
+
+.achievement-card__icon-wrapper {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: #64748b;
+    border-radius: 50%;
+    border: 2px solid #475569;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.achievement-card--active .achievement-card__icon-wrapper {
+    background: var(--gold);
+    border-color: #ca8a04;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.5), 0 0 10px rgba(234, 179, 8, 0.5);
+}
+
+.achievement-card__icon {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.achievement-card h3 {
+    margin: 0;
+    color: var(--azul-institucional);
+    font-family: 'Arial Black', Impact, sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.achievement-card p {
+    margin: 6px 0 0;
+    color: #475569;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.achievement-card__progress {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: #cbd5e1;
+    border-radius: 99px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 99px;
+    transition: width 0.5s ease;
+}
+
+.stats-leader {
+    width: min(760px, 100%);
+    margin: 0 auto 14px;
+    padding: 16px;
+    text-align: center;
+    background: var(--azul-institucional);
+    border-bottom: 6px solid var(--amarillo-cpf);
+    border-radius: 8px;
+    box-shadow: 0 12px 26px rgba(0, 51, 102, 0.22);
+}
+
+.stats-leader span,
+.stats-leader strong,
+.stats-leader p {
+    display: block;
+}
+
+.stats-leader span {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.stats-leader strong {
+    margin-top: 6px;
+    color: var(--amarillo-cpf);
+    font-family: 'Arial Black', Impact, sans-serif;
+    font-size: clamp(1.55rem, 3.8vw, 2.7rem);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.stats-leader p {
+    margin: 6px 0 0;
+    color: white;
+    font-weight: 900;
+}
+
+.ranking-list {
+    width: min(760px, 100%);
+    display: grid;
+    gap: 6px;
+    margin: 0 auto;
+}
+
+.ranking-row {
+    display: grid;
+    grid-template-columns: 44px 1fr 64px;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    background: white;
+    border: 1px solid rgba(138, 164, 200, 0.5);
+    border-radius: 6px;
+}
+
+.ranking-row__pos {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: var(--azul-boton);
+    border-radius: 999px;
+    font-weight: 900;
+}
+
+.ranking-row__name {
+    min-width: 0;
+    color: var(--azul-institucional);
+    font-weight: 900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ranking-row strong {
+    color: var(--rojo-acento);
+    font-family: 'Arial Black', Impact, sans-serif;
+    font-size: 1.08rem;
+    text-align: right;
+}
+
+.ranking-empty {
+    padding: 18px;
+    color: #64748b;
+    text-align: center;
+    background: white;
+    border: 1px dashed var(--azul-borde);
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+.roster-page {
+    overflow: hidden;
+}
+
+.roster-summary {
+    width: min(900px, 100%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: -8px auto 12px;
+    flex-wrap: wrap;
+}
+
+.roster-summary span {
+    padding: 5px 10px;
+    color: var(--azul-institucional);
+    background: white;
+    border: 1px solid rgba(138, 164, 200, 0.55);
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.roster-list {
+    width: min(980px, 100%);
+    max-height: 390px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 5px 8px;
+    margin: 0 auto;
+    padding-right: 4px;
+    overflow-y: auto;
+}
+
+.roster-row {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(138, 164, 200, 0.42);
+    border-radius: 5px;
+}
+
+.roster-row__name {
+    min-width: 0;
+    color: var(--azul-institucional);
+    font-size: 0.78rem;
+    font-weight: 900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.roster-row__group {
+    color: #64748b;
+    font-size: 0.62rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.roster-row--done {
+    background: rgba(234, 242, 255, 0.72);
+}
+
+.roster-row--done .roster-row__name {
+    color: #64748b;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--rojo-acento);
+}
+
+.roster-row--done .roster-row__group {
+    color: #94a3b8;
+}
+
+.dream-team-page {
+    overflow: hidden;
+}
+
+.dream-team-field {
+    width: min(980px, 100%);
+    height: 430px;
+    position: relative;
+    margin: 0 auto;
+    padding: 18px;
+    background:
+        radial-gradient(circle at 50% 50%, transparent 0 50px, rgba(255,255,255,0.7) 51px, rgba(255,255,255,0.7) 53px, transparent 54px),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.12) 1px, transparent 1px),
+        linear-gradient(135deg, #0F6B45, #1B8A5A);
+    background-size: auto, 54px 54px, 54px 54px, auto;
+    border: 4px solid white;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.28), 0 14px 28px rgba(0, 51, 102, 0.18);
+}
+
+.dream-team-field::before,
+.dream-team-field::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.dream-team-field::before {
+    inset: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    border-radius: 6px;
+}
+
+.dream-team-field::after {
+    top: 50%;
+    left: 18px;
+    right: 18px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.72);
+    transform: translateY(-50%);
+}
+
+.dream-team-field .field-center,
+.dream-team-field .field-box {
+    display: none;
+}
+
+.dream-player {
+    min-width: 0;
+    position: absolute;
+    z-index: 3;
+    width: 132px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 112px;
+    padding: 8px 7px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.92);
+    border: 2px solid rgba(255, 204, 0, 0.85);
+    border-radius: 8px;
+    box-shadow: 0 8px 18px rgba(0, 51, 102, 0.2);
+}
+
+.dream-player__number {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: var(--azul-institucional);
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 900;
+}
+
+.dream-player__photo {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    background: #EAF2FF;
+    border: 2px solid white;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(0, 51, 102, 0.18);
+}
+
+.dream-player__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dream-player h3 {
+    max-width: 100%;
+    margin: 0;
+    color: var(--azul-institucional);
+    font-size: 0.72rem;
+    font-weight: 900;
+    line-height: 1.05;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dream-player p {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 0.52rem;
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.dream-player strong {
+    max-width: 100%;
+    margin-top: 4px;
+    padding: 2px 5px;
+    color: var(--azul-institucional);
+    background: #FFF4BF;
+    border-radius: 999px;
+    font-size: 0.52rem;
+    font-weight: 900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dream-player--empty {
+    min-height: 92px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.68);
+    box-shadow: none;
+}
+
+.dream-player--empty .dream-player__number {
+    position: static;
+    width: 34px;
+    height: 34px;
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 51, 102, 0.35);
+}
+
+.dream-player--pos-1 { left: 50%; top: 88%; }
+.dream-player--pos-2 { left: 18%; top: 66%; }
+.dream-player--pos-3 { left: 39%; top: 69%; }
+.dream-player--pos-4 { left: 61%; top: 69%; }
+.dream-player--pos-5 { left: 82%; top: 66%; }
+.dream-player--pos-6 { left: 27%; top: 45%; }
+.dream-player--pos-7 { left: 50%; top: 48%; }
+.dream-player--pos-8 { left: 73%; top: 45%; }
+.dream-player--pos-9 { left: 25%; top: 20%; }
+.dream-player--pos-10 { left: 50%; top: 16%; }
+.dream-player--pos-11 { left: 75%; top: 20%; }
+
+@media (max-width: 640px) {
+    .internal-cover {
+        min-height: 360px;
+        padding: 24px 14px;
+    }
+
+    .internal-cover__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .internal-cover__message {
+        font-size: 0.82rem;
+    }
+
+    .end-page {
+        min-height: 360px;
+        padding: 24px 14px;
+    }
+
+    .country-card {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .country-card__confed {
+        width: 70px;
+        height: 70px;
+    }
+
+    .country-card__flag-bg {
+        width: 55%;
+        opacity: 0.14;
+    }
+
+    .country-card__flag-main {
+        width: 42px;
+        height: 32px;
+    }
+
+    .achievement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ranking-row {
+        grid-template-columns: 38px 1fr 48px;
+    }
+
+    .roster-list {
+        max-height: 440px;
+        grid-template-columns: 1fr;
+    }
+
+    .dream-team-field {
+        height: 620px;
+        padding: 12px;
+    }
+
+    .dream-team-field::before {
+        inset: 12px;
+    }
+
+    .dream-team-field::after {
+        left: 12px;
+        right: 12px;
+    }
+
+    .dream-player {
+        width: 112px;
+        min-height: 102px;
+    }
+
+    .dream-player h3 {
+        font-size: 0.66rem;
+    }
+
+    .dream-player--pos-1 { left: 50%; top: 91%; }
+    .dream-player--pos-2 { left: 21%; top: 73%; }
+    .dream-player--pos-3 { left: 43%; top: 76%; }
+    .dream-player--pos-4 { left: 57%; top: 66%; }
+    .dream-player--pos-5 { left: 79%; top: 73%; }
+    .dream-player--pos-6 { left: 25%; top: 50%; }
+    .dream-player--pos-7 { left: 50%; top: 53%; }
+    .dream-player--pos-8 { left: 75%; top: 50%; }
+    .dream-player--pos-9 { left: 24%; top: 27%; }
+    .dream-player--pos-10 { left: 50%; top: 18%; }
+    .dream-player--pos-11 { left: 76%; top: 27%; }
+}
+
+/* ID en la esquina (Dorado) */
+.id-pegado {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+    z-index: 10;
+}
+
+/* =========================================
+   AJUSTES PARA EL MODAL (FIGURITA COMPLETA)
+   ========================================= */
+
+/* Forzamos que la figurita del modal mantenga sus proporciones y no se corte */
+#modal-figurita .figurita-pegada {
+    width: 100%;
+    max-width: 320px;
+    /* Tamaño máximo de la figurita */
+    height: auto;
+    /* Permite que la altura se ajuste sola */
+    aspect-ratio: 3/4;
+    /* ¡La clave! Mantiene la proporción clásica de Panini */
+    margin: 0 auto;
+}
+
+/* La imagen dentro del modal debe llenar su espacio sin cortarse */
+#modal-figurita #modal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Cubre el área, pero al tener la proporción 3/4 no cortará cabezas */
+    object-position: center top;
+    /* Centra la imagen enfocándose en la cara */
+}
+
+/* El pie de foto dentro del modal */
+#modal-figurita .h-\[25\%\] {
+    flex-shrink: 0;
+    /* Evita que el nombre se aplaste */
+    height: auto !important;
+    /* Sobrescribe cualquier altura fija previa */
+    min-height: 25%;
+    /* Asegura un mínimo de espacio para el nombre */
+    padding: 10px 5px;
+}
+
+/* =========================================
+   SCI-FI HEADER EFFECTS
+   ========================================= */
+
+.scanner-laser {
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 25px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(0, 240, 255, 0.4), transparent);
+    z-index: 1;
+    animation: scanLaser 5s ease-in-out infinite;
+    pointer-events: none;
+    transform: skewX(-15deg);
+}
+
+@keyframes scanLaser {
+    0% { left: -10%; }
+    50% { left: 110%; }
+    100% { left: -10%; }
+}
+
+/* =========================================
+   PACK OPENING CINEMATIC EFFECTS
+   ========================================= */
+
+.virtual-pack {
+    width: 200px;
+    height: 280px;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+}
+
+.virtual-pack-front {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.pack-shake {
+    animation: packShake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes packShake {
+    10%, 90% { transform: translate3d(-2px, 0, 0) rotate(-2deg); }
+    20%, 80% { transform: translate3d(4px, 0, 0) rotate(2deg); }
+    30%, 50%, 70% { transform: translate3d(-6px, 0, 0) rotate(-4deg); }
+    40%, 60% { transform: translate3d(6px, 0, 0) rotate(4deg); }
+}
+
+.pack-explode {
+    animation: packExplode 0.6s ease-out forwards;
+}
+
+@keyframes packExplode {
+    0% { transform: scale(1); filter: brightness(1); opacity: 1; }
+    50% { transform: scale(1.3); filter: brightness(3); opacity: 0.8; }
+    100% { transform: scale(0); filter: brightness(5); opacity: 0; }
+}
+
+.card-reveal {
+    animation: cardReveal 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes cardReveal {
+    0% {
+        transform: scale(0) rotateY(-180deg) translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotateY(0deg) translateY(0);
+        opacity: 1;
+    }
+}
