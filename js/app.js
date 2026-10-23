@@ -293,7 +293,7 @@ function procesarDatosAlbum(datosBase) {
 
         alumnosGlobal = datosBase.map(alumno => ({
             ...alumno,
-            status: alumno.status || coleccionLocal.includes(alumno.id)
+            status: alumno.tiene_imagen ? true : (alumno.status || coleccionLocal.includes(alumno.id))
         }));
 
         grupos = [...new Set(alumnosGlobal.map(a => a.grupo))];
