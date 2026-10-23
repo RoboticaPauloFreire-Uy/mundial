@@ -10,7 +10,7 @@ let alumnosGlobal = [];
 let grupos = [];
 let paginaActual = 0;
 let acabaDeEscanear = false;
-const PAGINAS_EXTRA_FINALES = 4;
+const PAGINAS_EXTRA_FINALES = 0;
 const paisesPorGrupo = {
     "5A": { pais: "Colombia", bandera: "🇨🇴" },
     "5B": { pais: "Ecuador", bandera: "🇪🇨" },
@@ -411,26 +411,6 @@ function renderPagina() {
 
     if (paginaActual === 0) {
         renderPortadaInterna(grid, titulo, btnPrev, btnNext);
-        return;
-    }
-
-    if (paginaActual === grupos.length + 1) {
-        renderLogros(grid, titulo, btnPrev, btnNext);
-        return;
-    }
-
-    if (paginaActual === grupos.length + 2) {
-        renderEstadisticas(grid, titulo, btnPrev, btnNext);
-        return;
-    }
-
-    if (paginaActual === grupos.length + 3) {
-        renderEquipoIdeal(grid, titulo, btnPrev, btnNext);
-        return;
-    }
-
-    if (paginaActual === grupos.length + 4) {
-        renderListadoAlumnos(grid, titulo, btnPrev, btnNext);
         return;
     }
 
