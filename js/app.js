@@ -954,11 +954,7 @@ function abrirModal(id) {
 }
 
 function abrirCarpetaDrive() {
-    if (currentAlumno && currentAlumno.drive_url) {
-        window.open(currentAlumno.drive_url, '_blank');
-    } else {
-        alert("Aún no hay carpeta de Google Drive asignada para este alumno.");
-    }
+    // Enlace a Google Drive removido
 }
 
 function cerrarModal() {
