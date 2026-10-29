@@ -406,13 +406,20 @@ function renderPagina() {
     const titulo = document.getElementById('page-title');
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
+    const btnFlags = document.getElementById('btn-flags');
+    const btnHeaderFlags = document.getElementById('btn-header-flags');
 
     if (grupos.length === 0 || !grid) return;
 
     if (paginaActual === 0) {
+        if (btnFlags) btnFlags.classList.add('hidden');
+        if (btnHeaderFlags) btnHeaderFlags.classList.add('hidden');
         renderPortadaInterna(grid, titulo, btnPrev, btnNext);
         return;
     }
+
+    if (btnFlags) btnFlags.classList.remove('hidden');
+    if (btnHeaderFlags) btnHeaderFlags.classList.remove('hidden');
 
     const grupoActual = grupos[paginaActual - 1];
     if (titulo) {
@@ -530,7 +537,12 @@ function renderFichaPais(grupo) {
                 <small>Confed.</small>
             </div>
             <div class="country-card__content">
-                <p class="country-card__eyebrow">${escapeHtml(grupo)}</p>
+                <div class="flex justify-between items-center gap-2 mb-1">
+                    <p class="country-card__eyebrow" style="margin-bottom:0;">${escapeHtml(grupo)}</p>
+                    <button type="button" onclick="irAPagina(0)" class="text-[11px] font-bold uppercase tracking-wider text-[#003366] bg-white/90 hover:bg-white px-3 py-1 rounded-full shadow-sm border border-[#003366]/20 transition-all flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95" title="Volver al índice para elegir otra bandera">
+                        <span>🏳️</span> <span>Elegir Bandera</span>
+                    </button>
+                </div>
                 <h3><span class="country-card__flag-main"></span>${escapeHtml(pais.pais)}</h3>
                 <div class="country-card__facts">
                     <span><strong>Capital:</strong> ${escapeHtml(perfil.capital)}</span>
@@ -569,6 +581,11 @@ function renderPortadaInterna(grid, titulo, btnPrev, btnNext) {
     if (titulo) titulo.innerText = "PORTADA";
     if (btnPrev) btnPrev.classList.add('invisible');
     if (btnNext) btnNext.classList.remove('invisible');
+
+    const btnFlags = document.getElementById('btn-flags');
+    const btnHeaderFlags = document.getElementById('btn-header-flags');
+    if (btnFlags) btnFlags.classList.add('hidden');
+    if (btnHeaderFlags) btnHeaderFlags.classList.add('hidden');
 
     grid.innerHTML = `
         <section class="internal-cover col-span-2 md:col-span-4 animate__animated animate__fadeIn">
